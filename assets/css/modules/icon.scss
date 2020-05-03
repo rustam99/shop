@@ -1,0 +1,92 @@
+.icon {
+	background-image: url('/img/icons/icons.png');
+	background-repeat: no-repeat;
+	width: 26px;
+	height: 23px;
+
+	&_cart {
+		background-position-x: 0;
+
+		&:hover {
+			background-position-x: -30px;
+		}
+	}
+
+	&_personal {
+		background-position-x: -60px;
+
+		&:hover {
+			background-position-x: -90px;
+		}
+	}
+
+	&_favorites {
+		background-position-x: -120px;
+
+		&:hover {
+			background-position-x: -150px;
+		}
+	}
+
+	&_search {
+		background-position-x: -180px;
+
+		&:hover {
+			background-position-x: -210px;
+		}
+	}
+}
+
+.social-icon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url('/img/icons/social.png');
+	background-repeat: no-repeat;
+	cursor: pointer;
+
+	&:hover {
+		background-position-y: -22px;
+	}
+
+	&_in {
+		background-position-x: 0;
+	}
+
+	&_tg {
+		background-position-x: -23px;
+	}
+
+	&_vk {
+		background-position-x: -46px;
+	}
+}
+
+.login-icon {
+	width: 18px;
+	height: 18px;
+	background-image: url('/img/icons/login.png');
+	background-repeat: no-repeat;
+
+	&_letter {
+
+	}
+
+	&_lock {
+		&_closed {
+
+		}
+
+		&_opened {
+
+		}
+	}
+
+	&_key {
+
+	}
+
+	&_circle {
+		
+	}
+}
