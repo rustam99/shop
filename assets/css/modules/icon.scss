@@ -69,24 +69,24 @@
 	background-repeat: no-repeat;
 
 	&_letter {
-
+		background-position-x: 0;
 	}
 
 	&_lock {
 		&_closed {
-
+			background-position-x: -20px;
 		}
 
 		&_opened {
-
+			background-position-x: -40px;
 		}
 	}
 
 	&_key {
-
+		background-position-x: -60px;
 	}
 
 	&_circle {
-		
+		background-position-x: -80px;
 	}
 }

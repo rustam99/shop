@@ -28,13 +28,16 @@ module.exports = {
 				rel: "manifest",
 				href: "/site.webmanifest"
 			}
-		]
+		],
 	},
 	loading: { color: '#3B8070' },
 	css: [
 		'~node_modules/normalize.css/normalize.css',
 		'@/assets/fonts/fonts.css',
 		'@/assets/css/style.scss',
+	],
+	script: [
+		{src: '@/assets/js/header.js'}
 	],
 	plugins: [
 		{
@@ -43,7 +46,7 @@ module.exports = {
 		}
 	],
 	build: {
-		vendor: ['axios'],
+		vendor: ['axios', '@/assets/js/header.js'],
 		extend (config, { isDev, isClient }) {
 			if (isDev && isClient) {
 				config.module.rules.push({

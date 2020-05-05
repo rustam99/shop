@@ -9,17 +9,17 @@
 					<div
 						@click="toggleCategories"
 						:class="isArrowActive"
-						class="header__tab header__tab_indent arrow">
+						class="header__tab header__tab_indent arrow js-toggleCategories">
 						Категории
 					</div>
 					<nuxt-link to="/we" active-class="header__link_active" class="header__link">О нас</nuxt-link>
 					<nuxt-link to="/e" active-class="header__link_active" class="header__link">Контакты</nuxt-link>
 				</div>
-				<v-input class="header__search" icon="icon icon_search"/>
+				<v-input class="header__search" :icon="icons.search"/>
 				<nav class="header__nav">
 					<div
 						@click="togglePersonalList"
-						class="header__tab icon icon_personal">
+						class="header__tab icon icon_personal js-toggleList">
 					</div>
 					<nuxt-link to="/" class="header__link header__link_relative icon icon_favorites">
 						<div class="header__amount">1</div>
@@ -46,19 +46,27 @@ import vInput from '@/components/input';
 
 export default {
 	name: 'vHeader',
+	props: {
+		isOpenCategories: Boolean,
+		isOpenPersonalList: Boolean,
+	},
 	data() {
 		return {
-			isOpenCategories: false,
-			isOpenPersonalList: false,
 			isAuth: false,
+			icons: {
+				search: {
+					cursor: 'pointer',
+					icon: 'icon icon_search'
+				}
+			}
 		}
 	},
 	methods: {
 		toggleCategories() {
-			this.isOpenCategories = !this.isOpenCategories;
+			this.$emit('change', 'categories');
 		},
 		togglePersonalList() {
-			this.isOpenPersonalList = !this.isOpenPersonalList;
+			this.$emit('change', 'list');
 		}
 	},
 	computed: {

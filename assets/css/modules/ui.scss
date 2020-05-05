@@ -47,4 +47,13 @@
 	&:active {
 		box-shadow: inset 0 0 5px $black;
 	}
+
+	&_primary {
+		border-radius: 1em;
+
+		&:hover {
+			border-color: $indigo;
+			color: $indigo;
+		}
+	}
 }

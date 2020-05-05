@@ -1,7 +1,10 @@
 <template>
 	<div class="shop">
-		<div class="Wrapper">
-			<v-header/>
+		<div class="Wrapper" @click="rootFunc">
+			<v-header
+				:isOpenCategories="isOpenCategories"
+				:isOpenPersonalList="isOpenPersonalList"
+				@change="headerControls"/>
 			<div class="carousel-block">
 				<carousel
 					:perPage="1"
@@ -26,13 +29,40 @@
 import vHeader from '~/components/header';
 import product from '~/components/product';
 import vFooter from '~/components/footer';
+import {hideCategories, hidePersonalList} from '@/assets/js/header';
 
 export default {
 	name: 'indexPage',
+	data() {
+		return {
+			isOpenCategories: false,
+			isOpenPersonalList: false,
+		}
+	},
+	methods: {
+		headerControls(e) {
+			if (e === 'list') {
+				this.isOpenPersonalList = !this.isOpenPersonalList;
+			} else if (e === 'categories') {
+				this.isOpenCategories = !this.isOpenCategories;
+			}
+		},
+		rootFunc(e) {
+			const self = e.target;
+
+			if (this.isOpenCategories) {
+				hideCategories.call(this, self);
+			}
+
+			if (this.isOpenPersonalList) {
+				hidePersonalList.call(this, self);
+			}
+		}
+	},
 	computed: {
 		getProducts() {
 			return this.$store.state.products.products;
-		}
+		},
 	},
 	components: {
 		vHeader,

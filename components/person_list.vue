@@ -4,8 +4,8 @@
 			v-for="(el, index) in isAuth"
 			:key="index"
 			class="personal-list__item">
-			<nuxt-link to="login" class="link">
-				{{el}}
+			<nuxt-link :to="el.url" class="link">
+				{{el.name}}
 			</nuxt-link>
 		</li>
 	</ul>
@@ -21,16 +21,40 @@ export default {
 		return {
 			personalList: {
 				isAuth: [
-					'Выйти',
-					'Личный кабинет',
-					'Мои заказы',
-					'Избранное'
+					{
+						name: 'Выйти',
+						url: '/'
+					},
+					{
+						name: 'Личный кабинет',
+						url: '/'
+					},
+					{
+						name: 'Мои заказы',
+						url: '/'
+					},
+					{
+						name: 'Избранное',
+						url: '/'
+					},
 				],
 				isNotAuth: [
-					'Войти',
-					'Регистрация',
-					'Мои заказы',
-					'Избранное'
+					{
+						name: 'Войти',
+						url: 'login',
+					},
+					{
+						name: 'Регистрация',
+						url: 'signUp',
+					},
+					{
+						name: 'Мои заказы',
+						url: '/',
+					},
+					{
+						name: 'Избранное',
+						url: '/',
+					},
 				],
 			}
 		}
@@ -38,7 +62,7 @@ export default {
 	computed: {
 		isAuth() {
 			return this.auth ? this.personalList.isAuth : this.personalList.isNotAuth;
-		}
+		},
 	}
 }
 </script>

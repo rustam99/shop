@@ -2,11 +2,11 @@
 	<div class="product" :class="`product_${type}`">
 		<template v-if="type === 'default'">
 			<div class="product__img">
-				<img class="product__image" src="/img/misc/products/2145.png" alt="asd">
+				<img class="product__image" :src="img" :alt="alt">
 			</div>
 			<div class="product__desc">
-				<div class="product__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque fugit</div>
-				<div class="product__price">123р</div>
+				<div class="product__text">{{shortDesc}}</div>
+				<div class="product__price">{{price}}р</div>
 			</div>
 			<div class="product__controls">
 				<button class="product__button button">В корзину</button>
@@ -39,6 +39,7 @@ export default {
 		name: String,
 		shortDesc: String,
 		desc: String,
+		price: Number,
 	}
 }
 </script>

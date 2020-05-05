@@ -4,7 +4,11 @@
 			v-for="(el, index) in list"
 			:key="index"
 			class="product-list__item">
-			<product/>
+			<product
+				:img="el.img"
+				:alt="el.alt"
+				:shortDesc="el.shortDesc"
+				:price="el.price"/>
 		</li>
 	</ul>
 </template>
