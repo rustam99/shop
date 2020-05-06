@@ -5,10 +5,10 @@
 			<div class="login__form">
 				<h2 class="login__subtitle">Вход в аккаунт</h2>
 				<div class="login__field">
-					<v-input mod="bordered" placeholder="Email" icon="login-icon login-icon_letter"/>
+					<v-input mod="radiused" placeholder="Email" icon="login-icon login-icon_letter"/>
 				</div>
 				<div class="login__field">
-					<v-input mod="bordered" placeholder="Password" icon="login-icon login-icon_lock_closedr"/>
+					<v-input mod="radiused" placeholder="Password" icon="login-icon login-icon_lock_closedr"/>
 				</div>
 				<div class="login__field">
 					<v-input type="checkbox" label="Запомнить логин"/>
@@ -112,7 +112,9 @@ export default {
 		}
 	}
 
-	&__button {}
+	&__button {
+		border-radius: 1em;
+	}
 
 	&__info {
 		width: 40%;
