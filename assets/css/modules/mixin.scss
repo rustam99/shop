@@ -1,0 +1,47 @@
+@mixin margin-x($val) {
+	margin-left: $val;
+	margin-right: $val;
+}
+
+@mixin margin-y($val) {
+	margin-top: $val;
+	margin-bottom: $val;
+}
+
+@mixin padding-x($val) {
+	padding-left: $val;
+	padding-right: $val;
+}
+
+@mixin padding-y($val) {
+	padding-top: $val;
+	padding-bottom: $val;
+}
+
+@mixin border-top($color) {
+	border-top-color: $color;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+}
+
+@mixin border-right($color) {
+	border-top-color: transparent;
+	border-right-color: $color;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+}
+
+@mixin border-bottom($color) {
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: $color;
+	border-left-color: transparent;
+}
+
+@mixin border-left($color) {
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: $color;
+}
