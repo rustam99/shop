@@ -13,11 +13,16 @@
 					:minlength="el.minlength"
 					:maxlength="el.maxlength"
 					:type="el.type"
+					:confirm="el.confirm"
 					:errorMsg="el.errorMsg"
 					:req="el.req"/>
 			</div>
 			<div class="sign-up__field mt-20">
-				<v-input classNames="sign-up__input" type="checkbox" label="Соглашаюсь с тем то с тем то"/>
+				<v-input
+					@change="checkChoosed"
+					classNames="sign-up__input"
+					type="checkbox"
+					label="Соглашаюсь с тем то с тем то"/>
 			</div>
 			<button :class="disabled" class="sign-up__button button button_primary button_rect">Создать аккаунт</button>
 			<div class="sign-up__note">
@@ -70,31 +75,66 @@ export default {
 					placeholder: 'Повторите пароль',
 					classNames: 'sign-up__input',
 					type: 'password',
-					minlength: 8,
 					req: true,
+					confirm: false,
 					errorMsg: 'Пароли должны совподать',
 				}
 			],
-			validArr: [0, 0, 0, 0, 0],
+			validArr: [],
+			checkArr: [],
+			confirmData: {
+				conf: 0,
+				val: 1,
+			},
+			choosedRules: false,
+		}
+	},
+	created() {
+		for (let i = 0; i < this.inputs.length; i++) {
+
+			if (this.inputs[i].req) {
+				this.validArr[i] = 1;
+			}
 		}
 	},
 	methods: {
 		checkValid(e, index) {
 			if (e.valid) {
-				this.$set(this.validArr, index, 1);
+				this.$set(this.checkArr, index, 1);
 			} else {
-				this.$set(this.validArr, index, 0);
+				this.$set(this.checkArr, index, 0);
 			}
+
+			if (index === 3) {
+				this.confirmData.conf = e.val;
+			} else if (index === 4) {
+				this.confirmData.val = e.val;
+			}
+
+			this.inputs[this.inputs.length - 1].confirm = checkConfirm(this.confirmData.conf, this.confirmData.val);
+		},
+		checkChoosed(e) {
+			this.choosedRules = e;
 		}
 	},
 	computed: {
 		disabled() {
-			return this.validArr.includes(0) ? 'sign-up__button_disabled': '';
+			if (this.choosedRules) {
+				if (this.checkArr.join('') === this.validArr.join('')) {
+					return '';
+				}
+			}
+
+			return 'sign-up__button_disabled';
 		}
 	},
 	components: {
 		vInput,
 	}
+}
+
+function checkConfirm(conf, val) {
+	return conf === val;
 }
 </script>
 

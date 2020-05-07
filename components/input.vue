@@ -17,6 +17,7 @@
 		8) minlength и maxlength создает правила для валидации:
 			8.1 для email и tel своя валидация
 		9) errorMsg -> создает кастомное сообщение об ошибке
+		10) confirm -> создает кастомную проверку, нужно передовать буль, т.е. брать значения от эмита записывать в нужную переменую, и самому проверять верно или нет, при верном буле даст второй эмит, применять вместе с errorMsg
 */
 </style>
 
@@ -45,7 +46,7 @@
 		</template>
 		<template v-else-if="type === 'checkbox'">
 			<label class="input__row cursor-pointer">
-				<input class="hidden" type="checkbox">
+				<input @click="emitCheckbox" :checked="checkbox" class="hidden" type="checkbox">
 				<div class="input__checkbox"></div>
 				<div class="input__label input__label_ml">{{label}}</div>
 			</label>
@@ -72,11 +73,15 @@ export default {
 		minlength: Number,
 		maxlength: Number,
 		errorMsg: String,
+		confirm: Boolean,
 	},
 	data() {
 		return {
 			invalidText: '',
 			valid: false,
+			conf: false,
+			value: '',
+			checkbox: false,
 		}
 	},
 	methods: {
@@ -90,9 +95,9 @@ export default {
 					this.invalidText = '';
 					this.valid = true;
 				}
-			} else if (type !== 'email' && type !== 'tel' && checkText(this.minlength, this.maxlength, self.value, this.errorMsg)) {
+			} else if (type !== 'email' && type !== 'tel' &&
+				checkText(this.minlength, this.maxlength, self.value, this.errorMsg)) {
 				this.valid = false;
-
 				if (!self.value.length) {
 					this.invalidText = '';
 				}
@@ -120,6 +125,8 @@ export default {
 				}
 			}
 
+			this.value = self.value;
+
 			this.$emit('input', {
 				val: self.value,
 				valid: this.valid
@@ -136,12 +143,21 @@ export default {
 					if (text && self.value.length) {
 						this.invalidText = text;
 					}
+				} else if (this.confirm !== undefined) {
+					if (!this.conf && self.value.length) {
+						this.invalidText = this.errorMsg;
+					}
 				}
 			} else if (type === 'email' && !checkEmail(self.value) && self.value.length) {
 				this.invalidText = this.errorMsg || 'Введите верный email';
 			} else if (type === 'tel' && !checkPhone(self.value) && self.value.length) {
 				this.invalidText = this.errorMsg || 'Введите телефон в нужном формате +7 888 88 88';
 			}
+		},
+		emitCheckbox() {
+			this.checkbox = !this.checkbox;
+
+			this.$emit('change', this.checkbox);
 		}
 	},
 	computed: {
@@ -173,6 +189,23 @@ export default {
 		required() {
 			return this.req ? 'input_required': '';
 		},
+	},
+	watch: {
+		confirm() {
+			this.conf = this.confirm;
+			if (this.conf) {
+				this.invalidText = '';
+				this.valid = true;
+			} else {
+				this.invalidText = this.errorMsg;
+				this.valid = false;
+			}
+
+			this.$emit('input', {
+				val: this.value,
+				valid: this.valid
+			});
+		}
 	}
 }
 
